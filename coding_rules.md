@@ -68,3 +68,19 @@ if ( $doctor->hasFreeSlot ) {
     // Business logic, assign the appointment to the doctor etc
 }
 ```
+### Accessing Related Data
+* Eager load related data 
+In our typical Doctor appointment scenario, we have already defined relationships, this means we can access related data from the eloquent object. like
+``` 
+$doctor = Doctor::where('email', 'john@domain.com')->first();
+// Get appointments of this doctor
+foreach( $doctor->appointments as $appointment ) {
+   // Business log
+}
+```
+However, while quering multiple records always eager load related data if required. Example
+```
+$doctors = Doctor::select('id','name','email')
+            ->with('apointments')
+            ->paginate(10); // this will load doctors with appointments
+```
