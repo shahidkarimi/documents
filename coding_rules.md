@@ -89,7 +89,7 @@ Simlarly, we can access doctor information from appointment model.
 $appointment = App\Models\Apointment::find(1);
 echo $appointment->doctor->name; // This will print doctor name of this appoinment
 ```
-
+<br />
 
 * However, while quering multiple records always eager load related data if required. Example
 ```
