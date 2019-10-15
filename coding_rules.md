@@ -1,5 +1,7 @@
 # Coding rules
 
 ```
-Code here
+function foo($params){
+ //body
+}
 ```
