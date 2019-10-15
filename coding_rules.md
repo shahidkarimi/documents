@@ -41,13 +41,13 @@ class Appointment extends Eloquent
 ```
 ## Query Against Eloquent in the Laravel way
 
-Always use pagination for loading all data, unless needed for small size table.
+* Always use pagination for loading all data, unless needed for small size table.
 ```
 Doctor::paginate(10);
 ```
-This will return a Laravel Collection, you can convert this collection to any data structure supported by Laravel. (toJson(), toArray() etc).
+* This will return a Laravel Collection, you can convert this collection to any data structure supported by Laravel. (toJson(), toArray() etc).
 
-It is always better to specify only required columns while quering against a table.
+* It is always better to specify only required columns while quering against a table.
 ```
 Doctor::select('id','name','phone','email')->paginate(10);
 ```
@@ -61,7 +61,7 @@ class Doctor extend Eloquent
     }
 }
 ```
-Let's see this attribute in action
+* Let's see this attribute in action
 ```
 $doctor = Doctor::find(123);
 if ( $doctor->hasFreeSlot ) {
