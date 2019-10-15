@@ -90,6 +90,7 @@ $appointment = App\Models\Apointment::find(1);
 echo $appointment->doctor->name; // This will print doctor name of this appoinment
 ```
 
+
 * However, while quering multiple records always eager load related data if required. Example
 ```
 $doctors = App\Models\Doctor::select('id','name','email')
