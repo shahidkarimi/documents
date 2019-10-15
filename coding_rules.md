@@ -41,7 +41,8 @@ class Appointment extends Eloquent
    }
 }
 ```
-<br />
+\s\s
+
 ## Query Against Eloquent in the Laravel way
 
 * Always use pagination for loading multiple rows, unless needed for small size table.
@@ -50,13 +51,15 @@ App\Models\Doctor::paginate(10);
 ```
 
 * This will return a Laravel Collection, you can convert this collection to any data structure supported by Laravel. (toJson(), toArray() etc).
-<br />
+
+\s\s
 
 * It is always better to specify only required columns while quering against a table.
 ```
 App\Models\Doctor::select('id','name','phone','email')->paginate(10);
 ```
-<br />
+\s\s
+
 It is always great to benefit from OOP. For instance we can create a custom attribute to check if a doctor has free slot or not.
 ```
 class Doctor extend Eloquent 
@@ -67,7 +70,7 @@ class Doctor extend Eloquent
     }
 }
 ```
-<br />
+\s\s
 * Let's see this attribute in action
 ```
 $doctor = App\Models\Doctor::find(123);
@@ -75,7 +78,8 @@ if ( $doctor->hasFreeSlot ) {
     // Business logic, assign the appointment to the doctor etc
 }
 ```
-<br />
+\s\s
+
 ### Accessing Related Data
 * Eager load related data 
 In our typical Doctor appointment scenario, we have already defined relationships, this means we can access related data from the eloquent object. like
@@ -86,13 +90,14 @@ foreach( $doctor->appointments as $appointment ) {
    // Business log
 }
 ```
-<br />
+\s\s
+
 Simlarly, we can access doctor information from appointment model.
 ```
 $appointment = App\Models\Apointment::find(1);
 echo $appointment->doctor->name; // This will print doctor name of this appoinment
 ```
-<br />
+\s\s
 
 * However, while quering multiple records always eager load related data if required. Example
 ```
