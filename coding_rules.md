@@ -62,6 +62,7 @@ class Doctor extend Eloquent
 }
 ```
 Let's see this attribute in action
+```
 $doctor = Doctor::find(123);
 if ( $doctor->hasFreeSlot ) {
     // Business logic, assign the appointment to the doctor etc
