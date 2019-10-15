@@ -266,7 +266,7 @@ If we need to transform this data we will create Resource Collection as we did i
 
 ## PSR-2 Coding Style Standards
 We need to follow the [PSR-2 PHP Coding](https://www.php-fig.org/psr/psr-2/). Laravel itself stictly follows these rules.
-
+An example PSR-2 Compliant code https://github.com/shahidkarimi/documents/blob/master/MyClass.php
 However some obvious mistakes we do are
 1. Need to stick to a consitent variable naming convintion cameCase in our case.
 2. Stating braces of functions and classes must start from a new line
