@@ -1,7 +1,8 @@
 <?php
 namespace App\MyApplication
 
-class MyClass {
+class MyClass 
+{
 
     private $sytemUrl = null;
     
