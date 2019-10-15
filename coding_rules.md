@@ -20,7 +20,7 @@ class Doctor extends Eloquent
 ```
 ## Define ORM relationships precisely
 
-### Doctor to Appointments relationship
+Doctor to Appointments relationship
 ```
 class Doctor extends Eloquent
 {
@@ -33,7 +33,7 @@ class Doctor extends Eloquent
 
 <br />
 
-### Appointments to Doctor relationship
+Appointments to Doctor relationship
 ```
 class Appointment extends Eloquent
 {
@@ -87,7 +87,7 @@ if ( $doctor->hasFreeSlot ) {
 
 <br />
 
-### Accessing Related Data
+## Accessing Related Data
 * Eager load related data 
 In our typical Doctor appointment scenario, we have already defined relationships, this means we can access related data from the eloquent object. like
 ``` 
@@ -261,3 +261,13 @@ This will return
 ```
 This will perfectly work in our case, the actual data in the 'data' attribute. We also has all meta data like next page url, back page url, total records etc.
 If we need to transform this data we will create Resource Collection as we did in the above example. For details about resource collection read [this](https://laravel.com/docs/5.6/eloquent-resources).
+
+<br />
+
+## PSR-2 Coding Style Standards
+We need to follow the [PSR-2 PHP Coding](https://www.php-fig.org/psr/psr-2/). Laravel itself stictly follows these rules.
+
+However some obvious mistakes we do are
+1. Need to stick to a consitent variable naming convintion cameCase in our case.
+2. Stating braces of functions and classes must start from a new line
+
