@@ -78,7 +78,7 @@ foreach( $doctor->appointments as $appointment ) {
    // Business log
 }
 ```
-Also, we can access doctor information from appointment model.
+Simlarly, we can access doctor information from appointment model.
 ```
 $appointment = Apointment::find(1);
 echo $appointment->doctor->name; // This will print doctor name of this appoinment
