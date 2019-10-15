@@ -134,7 +134,8 @@ public function getDoctor($id)
 }
 ```
 This will return the following response
-```{
+```
+{
   "id": "123",
   "name" : "Joh Loop",
   "email" : "john@domain.com",
