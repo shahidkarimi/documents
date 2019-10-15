@@ -1,1 +1,5 @@
 # Coding rules
+
+```
+Code here
+```
