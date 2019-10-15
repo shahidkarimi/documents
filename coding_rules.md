@@ -114,3 +114,44 @@ $doctors = App\Models\Doctor::select('id','name','email')
             ->with('apointments')
             ->paginate(10); // this will load doctors with appointments
 ```
+
+<br />
+
+## Returning JSON Data
+All JSON response must have a signle pattern across the application. The will make our life easiter as well as the app afficient. Some times we need collection of data and some times a single row, in both cases the data must be consitent for each endpoint returning json data.
+Luckily, Laravel providers all technigues required to mold the data for our needs. Let's check these examples.
+
+#### Example 1
+Return a Doctor data
+```
+public function getDoctor($id)
+{
+
+    $doctor = App\Models\Doctor::select('id','email','phone','address')
+            ->with('appointments')
+            ->find($id);
+    return response->json($doctor);
+}
+```
+This will return the following response
+```{
+  "id": "123",
+  "name" : "Joh Loop",
+  "email" : "john@domain.com",
+  "address" : "Bangkok Thailand",
+  "apointments": [
+    {
+      "id" : "98",
+      "date": "11-11-2019 16:10",
+      "patient_id" : "678",
+      "is_vip": false
+    },
+    {
+      "id" : "99",
+      "date": "11-11-2019 17:10",
+      "patient_id" : "679",
+      "is_vip": true
+    }  
+  ]
+}
+```
