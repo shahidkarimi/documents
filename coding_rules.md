@@ -78,7 +78,13 @@ foreach( $doctor->appointments as $appointment ) {
    // Business log
 }
 ```
-However, while quering multiple records always eager load related data if required. Example
+Also, we can access doctor information from appointment model.
+```
+$appointment = Apointment::find(1);
+echo $appointment->doctor->name; // This will print doctor name of this appoinment
+```
+
+* However, while quering multiple records always eager load related data if required. Example
 ```
 $doctors = Doctor::select('id','name','email')
             ->with('apointments')
