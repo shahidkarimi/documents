@@ -3,13 +3,13 @@
 ## Eloquent Models vs DB Raw queries
 Use as much as Eloquent Models / ORM. This will make the code clean readable as well as efficient.
 For example there are two tables  for doctors and appointments viz 'doctors' and 'appointments'. We will have eloquent models for this in this way.
-*Doctors 
+* Doctors 
 ```
 class Doctor extends Eloquent{
 
 }
 ```
-*Appointments 
+* Appointments 
 ```
 class Doctor extends Eloquent{
 
@@ -35,3 +35,14 @@ class Appointment extends Eloquent{
    }
 }
 ```
+## Query Against Eloquent in the Laravel way
+
+Always use pagination for loading all data, unless needed for small size table.
+```
+Doctor::paginate(10);
+```
+It is always better to specify only required columns while quering against a table.
+```
+Doctor::select('id','name','phone','email')->paginate(10);
+```
+Use OOP to keep things clear. 
