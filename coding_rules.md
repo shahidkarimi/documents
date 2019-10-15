@@ -224,4 +224,40 @@ This will return the following response.
 <br />
 
 #### Example 2, returning collection/paginated data
-It is clear that, we always return paginated data for multiple records.
+It is clear that, we always return paginated data for multiple records. We will never return multiple records with ->get(), this will load all data and it will eventually fail when data grows.
+Laravel, eloquent or DB paginate() function on collection object will return what we need.
+Let's see how the response looks like for returning all doctors.
+```
+public function getDoctors()
+{
+    return App\Models\Doctor::select('id','name','email')
+          ->paginate(10);
+}
+```
+
+This will return 
+
+```
+{
+	"total": 200,
+	"per_page": 2,
+	"current_page": 1,
+	"last_page": 20,
+	"next_page_url": "http:\/\/localhost.com?page=2",
+	"prev_page_url": null,
+	"from": 1,
+	"to": 2,
+	"data": [{
+		"id": "23",
+	  	"name": "Martha Vjay",
+	  	"email": "martha@domain.com
+	}, {
+		"id": "25",
+	  	"name": "Skamful Khan",
+	  	"email": "skamful@domain.com
+	}]
+}
+
+```
+This will perfectly work in our case, the actual data in the 'data' attribute. We also has all meta data like next page url, back page url, total records etc.
+If we need to transform this data we will create Resource Collection as we did in the above example. For details about resource collection read [this](https://laravel.com/docs/5.6/eloquent-resources).
