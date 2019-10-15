@@ -121,13 +121,13 @@ $doctors = App\Models\Doctor::select('id','name','email')
 All JSON response must have a signle pattern across the application. The will make our life easiter as well as the app afficient. Some times we need collection of data and some times a single row, in both cases the data must be consitent for each endpoint returning json data.
 Luckily, Laravel providers all technigues required to mold the data for our needs. Let's check these examples.
 
-#### Example 1
+#### Example 1, returning single row
 Return a Doctor data
 ```
 public function getDoctor($id)
 {
 
-    $doctor = App\Models\Doctor::select('id','email','phone','address')
+    $doctor = App\Models\Doctor::select('id','email','phone','address','dob')
             ->with('appointments')
             ->find($id);
     return response->json($doctor);
@@ -156,3 +156,72 @@ This will return the following response
   ]
 }
 ```
+For some reasons, if we need to transform this data let's say we need another key "is_birthday", this will return true if the doctors date of birth matches today's date, also the other requirement is change the 'email' key into 'email_address'.
+To acomplish this we must use Laravel [Eloquent Resources](https://laravel.com/docs/5.6/eloquent-resources)
+* You can use tinker to create this resource
+``` 
+php artisan make:resource DoctorResource 
+```
+This will create the resource class
+
+```
+class DoctorResource extends JsonResource 
+{
+    public functions toArray($request)
+    {
+        return [
+            'name' => $request->name,
+            'email_addres' => $requst->email,
+            'address' => $request->address,
+            'is_birthday' => $request->dob ==  Carbon\Carbon::now() ? true : false,
+            'apointments' => ApointmentResource::collection($request->apointments);
+        ];
+    }
+}
+```
+
+Now, implement this resouce
+```
+public function getDoctor($id)
+{
+
+    $doctor = App\Models\Doctor::select('id','email','phone','address','dob')
+            ->with('appointments')
+            ->find($id);
+            
+    return new DoctorResource($doctor);
+}
+```
+
+<br />
+
+This will return the following response.
+
+```
+{
+  "id": "123",
+  "name" : "Joh Loop",
+  "email_address" : "john@domain.com",
+  "address" : "Bangkok Thailand",
+  "is_birthday" : false,
+  "apointments": [
+    {
+      "id" : "98",
+      "date": "11-11-2019 16:10",
+      "patient_id" : "678",
+      "is_vip": false
+    },
+    {
+      "id" : "99",
+      "date": "11-11-2019 17:10",
+      "patient_id" : "679",
+      "is_vip": true
+    }  
+  ]
+}
+```
+
+<br />
+
+#### Example 2, returning collection/paginated data
+It is clear that, we always return paginated data for multiple records.
