@@ -100,7 +100,7 @@ foreach( $doctor->appointments as $appointment ) {
 
 <br />
 
-Simlarly, we can access doctor information from appointment model.
+Similarly, we can access doctor information from appointment model.
 ```
 $appointment = App\Models\Apointment::find(1);
 echo $appointment->doctor->name; // This will print doctor name of this appoinment
@@ -162,7 +162,7 @@ To acomplish this we must use Laravel [Eloquent Resources](https://laravel.com/d
 ``` 
 php artisan make:resource DoctorResource 
 ```
-This will create the resource class
+This will create the resource class. Now write the transformation logic in the toArray() function
 
 ```
 class DoctorResource extends JsonResource 
@@ -171,7 +171,7 @@ class DoctorResource extends JsonResource
     {
         return [
             'name' => $request->name,
-            'email_addres' => $requst->email,
+            'email_addres' => $request->email,
             'address' => $request->address,
             'is_birthday' => $request->dob ==  Carbon\Carbon::now() ? true : false,
             'apointments' => ApointmentResource::collection($request->apointments);
@@ -180,7 +180,7 @@ class DoctorResource extends JsonResource
 }
 ```
 
-Now, implement this resouce
+Now, implement this resource
 ```
 public function getDoctor($id)
 {
