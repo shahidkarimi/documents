@@ -41,15 +41,15 @@ class Appointment extends Eloquent
 ```
 ## Query Against Eloquent in the Laravel way
 
-* Always use pagination for loading all data, unless needed for small size table.
+* Always use pagination for loading multiple rows, unless needed for small size table.
 ```
-Doctor::paginate(10);
+App\Models\Doctor::paginate(10);
 ```
 * This will return a Laravel Collection, you can convert this collection to any data structure supported by Laravel. (toJson(), toArray() etc).
 
 * It is always better to specify only required columns while quering against a table.
 ```
-Doctor::select('id','name','phone','email')->paginate(10);
+App\Models\Doctor::select('id','name','phone','email')->paginate(10);
 ```
 It is always great to benefit from OOP. For instance we can create a custom attribute to check if a doctor has free slot or not.
 ```
@@ -63,7 +63,7 @@ class Doctor extend Eloquent
 ```
 * Let's see this attribute in action
 ```
-$doctor = Doctor::find(123);
+$doctor = App\Models\Doctor::find(123);
 if ( $doctor->hasFreeSlot ) {
     // Business logic, assign the appointment to the doctor etc
 }
@@ -72,7 +72,7 @@ if ( $doctor->hasFreeSlot ) {
 * Eager load related data 
 In our typical Doctor appointment scenario, we have already defined relationships, this means we can access related data from the eloquent object. like
 ``` 
-$doctor = Doctor::where('email', 'john@domain.com')->first();
+$doctor = App\Models\Doctor::where('email', 'john@domain.com')->first();
 // Get appointments of this doctor
 foreach( $doctor->appointments as $appointment ) {
    // Business log
@@ -80,13 +80,13 @@ foreach( $doctor->appointments as $appointment ) {
 ```
 Simlarly, we can access doctor information from appointment model.
 ```
-$appointment = Apointment::find(1);
+$appointment = App\Models\Apointment::find(1);
 echo $appointment->doctor->name; // This will print doctor name of this appoinment
 ```
 
 * However, while quering multiple records always eager load related data if required. Example
 ```
-$doctors = Doctor::select('id','name','email')
+$doctors = App\Models\Doctor::select('id','name','email')
             ->with('apointments')
             ->paginate(10); // this will load doctors with appointments
 ```
