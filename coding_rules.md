@@ -3,13 +3,13 @@
 ## Eloquent Models vs DB Raw queries
 Use as much as Eloquent Models / ORM. This will make the code clean readable as well as efficient.
 For example there are two tables  for doctors and appointments viz 'doctors' and 'appointments'. We will have eloquent models for this in this way.
-* Doctors *
+*Doctors 
 ```
 class Doctor extends Eloquent{
 
 }
 ```
-* Appointments *
+*Appointments 
 ```
 class Doctor extends Eloquent{
 
