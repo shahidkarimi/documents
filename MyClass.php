@@ -3,7 +3,6 @@ namespace App\MyApplication
 
 class MyClass 
 {
-
     private $sytemUrl = null;
     
     public function testFuction( $url )
