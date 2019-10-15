@@ -4,6 +4,7 @@ namespace App\MyApplication
 class MyClass 
 {
     private $sytemUrl = null;
+    public static const DEBUG = false;
     
     public function testFuction( $url )
     {
@@ -15,5 +16,7 @@ class MyClass
         foreach ($rows as $row) {
             // Logic here
         }
+        
+        $this->foo();
     }
 }
