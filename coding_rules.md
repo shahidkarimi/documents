@@ -271,3 +271,20 @@ However some obvious mistakes we do are
 1. Need to stick to a consitent variable naming convintion cameCase in our case.
 2. Stating braces of functions and classes must start from a new line
 
+## Database transactions must always be ATOMIC
+While updating/inserting multiple tables there is a chance of data curroption. To avoid this we always need to make sure the database transactions take place in a transacted way. It will completely fail or completely success.
+*Example
+```
+DB::transaction(function() {
+    $doctor = new App\Models\Doctor([/* Doctor Details */]);
+    $doctor->save();
+
+    $appontment = new Apointment;
+    $apointment->doctor_id = $doctor->id;
+    $apointment->save();
+
+    ActivityLogging::newActity('added_doctor');
+});
+
+```
+Everything inside the Closure executes within a transaction. If an exception occurs it will rollback automatically otherise it will be committed and changes will be saved in the respective tables.
